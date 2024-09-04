@@ -1,0 +1,765 @@
+\documentclass[12pt]{article}
+
+\usepackage[letterpaper, margin=1in]{geometry}
+
+
+\usepackage[colorlinks]{hyperref}
+\usepackage{makeidx}
+\usepackage{framed}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{colorlinks = true, allcolors = blue}
+\usepackage{float}
+\usepackage{flafter}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{afterpage}
+
+\usepackage{datetime}
+\renewcommand{\dateseparator}{-}
+\yyyymmdddate
+
+  \usepackage{setspace}
+  % custom spacing for paragraphs
+  \setstretch{1.5}
+
+  % set spacing 1.0 for tables and code
+  \AtBeginEnvironment{tabular}{\singlespacing}
+  \AtBeginEnvironment{table}{\singlespacing}
+  \AtBeginEnvironment{longtable}{\singlespacing}
+  \AtBeginEnvironment{verbatim}{\singlespacing}
+  \AtBeginEnvironment{Shaded}{\singlespacing}
+
+% texlive >= 2020
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+
+
+% set text colour to #2c2e35
+\usepackage{xcolor}
+\definecolor{dark}{HTML}{2c2e35}
+\color{dark}
+
+% set link colour to #1e3765
+\definecolor{myblue}{HTML}{1e3765}
+\hypersetup{colorlinks,linkcolor=myblue,urlcolor=myblue}
+
+
+
+\makeindex
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% To pass between YAML and LaTeX the dollar signs are added by CII
+% Syntax highlighting #22
+  \usepackage{color}
+  \usepackage{fancyvrb}
+  \newcommand{\VerbBar}{|}
+  \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+  % Add ',fontsize=\small' for more characters per line
+  \usepackage{framed}
+  \definecolor{shadecolor}{RGB}{241,243,245}
+  \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+  \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+  \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+  \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+  \newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+  \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+  \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+  \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+  \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+  \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+  \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+  \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+  \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+  \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+  \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+  \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+  \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+  \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+  \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+  \newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+  \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+  \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+  \newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+  \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+  \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+  \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\author{
+  Mauricio Vargas Sepúlveda (ORCID 0000-0003-1017-7574)\\Department of
+Political Science, University of Toronto\\Munk School of Global Affairs
+and Public Policy, University of Toronto\\
+  \smallskip\\
+  \\\\
+  \smallskip\\
+  Corresponding author: m.sepulveda@mail.utoronto.ca
+}
+\title{Armadillo and Eigen: A Tale of Two Linear Algebra Libraries}
+\date{Last updated: \today\ \currenttime}
+
+\setlength\parindent{0pt}
+\setlength\parskip{2pt}
+
+% Change the university
+\newcommand{\university}{}
+% Change the department
+\newcommand{\department}{}
+
+\begin{document}
+
+\maketitle
+
+
+\thispagestyle{empty}
+\tableofcontents
+\setcounter{page}{0}
+\clearpage
+
+\afterpage{\setlength\parskip{10pt}}
+
+\section{Abstract}\label{abstract}
+
+This article introduces \texttt{cpp11eigen}, a new R package that
+integrates the powerful Eigen C++ library for linear algebra into the R
+programming environment. This article provides a detailed comparison
+between Armadillo and Eigen speed and syntax. The \texttt{cpp11eigen}
+package simplifies a part of the process of using C++ within R by
+offering additional ease of integration for those who require
+high-performance linear algebra operations in their R workflows. This
+work aims to discuss the tradeoff between computational efficiency and
+accessibility.
+
+\section{Introduction}\label{introduction}
+
+R is widely used by non-programmers (Wickham et al. 2019), and this
+article aims to introduce benchmarks in a non-technical yet formal
+manner for social scientists. Our goal is to provide a fair comparison
+between Eigen and Armadillo, being both highly efficient linear algebra
+libraries written in C++. We do it by using
+\href{https://pacha.dev/cpp11eigen}{\texttt{cpp11eigen}} and
+\href{https://pacha.dev/cpp11armadillo}{\texttt{cpp11armadillo}}.
+
+\href{https://eigen.tuxfamily.org/index.php?title=Main_Page}{Eigen}
+emphasizes flexibility and speed, while
+\href{http://arma.sourceforge.net/}{Armadillo} focuses on a balance
+between speed and easy of use.
+
+\href{https://cran.r-project.org/package=RcppEigen}{`RcppEigen'},
+introduced in 2011, integrates Eigen with R through the Rcpp package,
+enabling the use of C++ for performance-critical parts of R code.
+\href{https://cran.r-project.org/package=RcppArmadillo}{`RcppArmadillo'}
+has a similar goal (Sanderson and Curtin 2016; Eddelbuettel and
+Sanderson 2014). At the time of writing this article, 247 CRAN packages
+depend on `RcppEigen', 755 on `RcppArmadillo' (Lee 2024), and therefore
+these are highly successful packages.
+
+\texttt{cpp11eigen} is an independent project that aims to simplify the
+integration of R and C++ by using `cpp11', an R package that eases using
+C++ functions from R. A distinctive characteristics of
+\texttt{cpp11eigen} is the vendoring capability, meaning that it allows
+to copy its code into a project, making it a one-time dependency with a
+fixed and stable code until it is updated, and it is useful in
+restricted environments such as servers and clusters (Wickham et al.
+2019; Vaughan, Hester, and François 2023).
+
+\texttt{cpp11armadillo} offers similar features and both libraries are
+useful in cases where vectorization (e.g., applying an operation to a
+vector or matrix as a whole instead of looping over each element) is not
+possible or challenging. A detailed discussion and examples about why
+and when (and when not) rewriting R code in C++ is useful can be found
+in Burns (2011) and Vargas Sepúlveda (2023).
+
+We followed four design principles when developing \texttt{cpp11eigen},
+same as \texttt{cpp11armadillo} (Vargas Sepúlveda and Schneider Malamud
+2024): column oriented, package oriented, header-only, and vendoring
+capable.
+
+\section{Syntax and benchmarks}\label{syntax-and-benchmarks}
+
+One possibility is to start by creating minimal R packages with the
+provided templates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"pachadotdev/cpp11armadillo"}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"pachadotdev/cpp11eigen"}\NormalTok{)}
+
+\NormalTok{cpp11eigen}\SpecialCharTok{::}\FunctionTok{create\_package}\NormalTok{(}\StringTok{"armadillobenchmark"}\NormalTok{)}
+\NormalTok{cpp11eigen}\SpecialCharTok{::}\FunctionTok{create\_package}\NormalTok{(}\StringTok{"eigenbenchmark"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Comparing numerical libraries requires to write equivalent codes. For
+instance, in R we can use \texttt{apply()} functions while in C++ we
+need to write a \texttt{for} loop, and this allows a fair comparison
+between the two libraries. However, R has heavily optimized functions
+that also verify the input data, such as \texttt{lm()} and
+\texttt{glm()}, that do not have a direct equivalent in Armadillo or
+Eigen, and for a fair comparison the options are to write a simplified
+function for the linear model in R or to write a more complex function
+in C++.
+
+The ATT benchmark, is a set of functions that can be rewritten using
+Armadillo and Eigen with relative ease, and test has the advantage of
+being well-known and widely used in the R community.
+
+The first test in the ATT benchmark is the creation, transposition and
+deformation of an \(N \times N\) matrix (\(2,500 \times 2,500\) in the
+original test). The R code comparable to the Armadillo code is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matrix\_calculation\_01\_r }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  a }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(n }\SpecialCharTok{*}\NormalTok{ n) }\SpecialCharTok{/} \DecValTok{10}\NormalTok{, }\AttributeTok{ncol =}\NormalTok{ n, }\AttributeTok{nrow =}\NormalTok{ n)}
+\NormalTok{  b }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(a)}
+  \FunctionTok{dim}\NormalTok{(b) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(n }\SpecialCharTok{/} \DecValTok{2}\NormalTok{, n }\SpecialCharTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{  a }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(b)}
+  \FunctionTok{return}\NormalTok{(}\DecValTok{0}\NormalTok{L)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The Armadillo code is very similar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11.hpp\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11armadillo.hpp\textgreater{}}
+
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ arma}\OperatorTok{;}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ cpp11}\OperatorTok{;}
+
+\OperatorTok{[[}\AttributeTok{cpp11}\OperatorTok{::}\AttributeTok{register}\OperatorTok{]]} \DataTypeTok{int} \VariableTok{matrix\_calculation\_01\_arma\_}\OperatorTok{(}\AttributeTok{const} \DataTypeTok{int}\OperatorTok{\&}\NormalTok{ n}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{  mat a }\OperatorTok{=}\NormalTok{ randn}\OperatorTok{\textless{}}\NormalTok{mat}\OperatorTok{\textgreater{}(}\NormalTok{n}\OperatorTok{,}\NormalTok{n}\OperatorTok{)} \OperatorTok{/} \DecValTok{10}\OperatorTok{;}
+\NormalTok{  mat b }\OperatorTok{=}\NormalTok{ a}\OperatorTok{.}\NormalTok{t}\OperatorTok{();}
+\NormalTok{  b}\OperatorTok{.}\NormalTok{reshape}\OperatorTok{(}\NormalTok{n}\OperatorTok{/}\DecValTok{2}\OperatorTok{,}\NormalTok{ n}\OperatorTok{*}\DecValTok{2}\OperatorTok{);}
+\NormalTok{  a }\OperatorTok{=}\NormalTok{ b}\OperatorTok{.}\NormalTok{t}\OperatorTok{();}
+  \ControlFlowTok{return} \DecValTok{0}\OperatorTok{;}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The Eigen code requires to create a function to draw random numbers from
+a normal distribution but it has a built-in function for the uniform
+distribution:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11.hpp\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11eigen.hpp\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}random\textgreater{}}
+
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ Eigen}\OperatorTok{;}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ cpp11}\OperatorTok{;}
+
+\BuiltInTok{std::}\NormalTok{mt19937}\OperatorTok{\&}\NormalTok{ random\_normal}\OperatorTok{()} \OperatorTok{\{}
+  \AttributeTok{static} \BuiltInTok{std::}\NormalTok{random\_device rd}\OperatorTok{;}
+  \AttributeTok{static} \BuiltInTok{std::}\NormalTok{mt19937 gen}\OperatorTok{(}\NormalTok{rd}\OperatorTok{());}
+  \ControlFlowTok{return}\NormalTok{ gen}\OperatorTok{;}
+\OperatorTok{\}}
+
+\OperatorTok{[[}\AttributeTok{cpp11}\OperatorTok{::}\AttributeTok{register}\OperatorTok{]]} \DataTypeTok{int} \VariableTok{matrix\_calculation\_01\_eigen\_}\OperatorTok{(}\AttributeTok{const} \DataTypeTok{int}\OperatorTok{\&}\NormalTok{ n}\OperatorTok{)} \OperatorTok{\{}
+  \BuiltInTok{std::}\NormalTok{normal\_distribution}\OperatorTok{\textless{}}\DataTypeTok{double}\OperatorTok{\textgreater{}}\NormalTok{ d}\OperatorTok{(}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{);}
+  
+\NormalTok{  MatrixXd a }\OperatorTok{=}\NormalTok{ MatrixXd}\OperatorTok{::}\NormalTok{NullaryExpr}\OperatorTok{(}\NormalTok{n}\OperatorTok{,}\NormalTok{ n}\OperatorTok{,} \OperatorTok{[\&]()} \OperatorTok{\{}
+    \ControlFlowTok{return}\NormalTok{ d}\OperatorTok{(}\NormalTok{random\_normal}\OperatorTok{());}
+  \OperatorTok{\})} \OperatorTok{/} \DecValTok{10}\OperatorTok{;}
+
+  \CommentTok{// for the uniform distribution this is simpler}
+  \CommentTok{// MatrixXd a = MatrixXd::Random(n, n) / 10;}
+
+\NormalTok{  MatrixXd b }\OperatorTok{=}\NormalTok{ a}\OperatorTok{.}\NormalTok{transpose}\OperatorTok{();}
+\NormalTok{  b}\OperatorTok{.}\NormalTok{resize}\OperatorTok{(}\NormalTok{n }\OperatorTok{/} \DecValTok{2}\OperatorTok{,}\NormalTok{ n }\OperatorTok{*} \DecValTok{2}\OperatorTok{);}
+  \ControlFlowTok{return} \DecValTok{0}\OperatorTok{;}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The functions to do not move data between R and C++, and this is
+intentional to focus on the performance of the linear algebra libraries
+and not adding overhead from data transfer in the benchmarks. Each
+function creates a matrix and conducts equivalent operations on it. The
+returned value is zero in R and C++ in case that the functions run
+without errors.
+
+The benchmarks were conducted on a ThinkPad X1 Carbon Gen 9 with the
+following specifications:
+
+\begin{itemize}
+\tightlist
+\item
+  Processor: Intel Core i7-1185G7 with eight cores
+\item
+  Memory: 16 GB LPDDR4Xx-4266
+\item
+  Operating System: Pop!\_OS 22.04 based on Ubuntu 22.04
+\item
+  R Version: 4.4.1
+\item
+  BLAS Library: OpenBLAS 0.3.20
+\end{itemize}
+
+The median times for the adapted and comparable implementations of the
+ATT benchmarks are as follows:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8353}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1059}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0588}}@{}}
+\caption{Matrix calculation}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(2,400 \times 2,400\) \(\text{matrix}^{1,000}\) - Armadillo & \(0.188\)
+& 1 \\
+\(2,400 \times 2,400\) \(\text{matrix}^{1,000}\) - Eigen & \(0.301\) &
+2 \\
+\(2,400 \times 2,400\) \(\text{matrix}^{1,000}\) - R & \(0.325\) & 3 \\
+\(2,800 \times 2,800\) cross-product matrix - Armadillo & \(0.398\) &
+1 \\
+\(2,800 \times 2,800\) cross-product matrix - R & \(0.444\) & 2 \\
+\(2,800 \times 2,800\) cross-product matrix - Eigen & \(1.151\) & 3 \\
+Creation and modification of a \(2,500 \times 2,500\) matrix - Armadillo
+& \(0.204\) & 1 \\
+Creation and modification of a \(2,500 \times 2,500\) matrix - Eigen &
+\(0.232\) & 2 \\
+Creation and modification of a \(2,500 \times 2,500\) matrix - R &
+\(0.294\) & 3 \\
+Linear regression over a \(3,000 \times 3,000\) matrix - Armadillo &
+\(0.459\) & 1 \\
+Linear regression over a \(3,000 \times 3,000\) matrix - R & \(5.303\) &
+2 \\
+Linear regression over a \(3,000 \times 3,000\) matrix - Eigen &
+\(8.809\) & 3 \\
+Sorting of 7,000,000 values - Armadillo & \(0.663\) & 1 \\
+Sorting of 7,000,000 values - Eigen & \(0.691\) & 2 \\
+Sorting of 7,000,000 values - R & \(0.759\) & 3 \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8293}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1098}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0610}}@{}}
+\caption{Matrix functions}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cholesky decomposition of a \(3,000 \times 3,000\) matrix - Armadillo &
+\(0.608\) & 1 \\
+Cholesky decomposition of a \(3,000 \times 3,000\) matrix - R &
+\(0.709\) & 2 \\
+Cholesky decomposition of a \(3,000 \times 3,000\) matrix - Eigen &
+\(2.902\) & 3 \\
+Determinant of a \(2,500 \times 2,500\) matrix - Armadillo & \(0.293\) &
+1 \\
+Determinant of a \(2,500 \times 2,500\) matrix - R & \(0.303\) & 2 \\
+Determinant of a \(2,500 \times 2,500\) matrix - Eigen & \(0.562\) &
+3 \\
+Eigenvalues of a \(640 \times 640\) matrix - Armadillo & \(0.367\) &
+1 \\
+Eigenvalues of a \(640 \times 640\) matrix - R & \(0.369\) & 2 \\
+Eigenvalues of a \(640 \times 640\) matrix - Eigen & \(1.629\) & 3 \\
+Fast Fourier Transform over 2,400,000 values - Eigen & \(0.14\) & 1 \\
+Fast Fourier Transform over 2,400,000 values - R & \(0.23\) & 2 \\
+Fast Fourier Transform over 2,400,000 values - Armadillo & \(0.294\) &
+3 \\
+Inverse of a \(1,600 \times 1,600\) matrix - Armadillo & \(0.312\) &
+1 \\
+Inverse of a \(1,600 \times 1,600\) matrix - R & \(0.324\) & 2 \\
+Inverse of a \(1,600 \times 1,600\) matrix - Eigen & \(0.758\) & 3 \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.7045}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2386}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0568}}@{}}
+\caption{Programmation}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Operation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Time (s)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Rank
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+3,500,000 Fibonacci numbers calculation - Eigen & \(1.4 \times 10^{-1}\)
+& 1 \\
+3,500,000 Fibonacci numbers calculation - Armadillo &
+\(1.7 \times 10^{-1}\) & 2 \\
+3,500,000 Fibonacci numbers calculation - R & \(1.7 \times 10^{-1}\) &
+3 \\
+Creation of a \(3,000 \times 3,000\) Hilbert matrix - Eigen &
+\(4.6 \times 10^{-6}\) & 1 \\
+Creation of a \(3,000 \times 3,000\) Hilbert matrix - Armadillo &
+\(5.9 \times 10^{-2}\) & 2 \\
+Creation of a \(3,000 \times 3,000\) Hilbert matrix - R &
+\(1.5 \times 10^{-1}\) & 3 \\
+Creation of a \(500 \times 500\) Toeplitz matrix - Eigen &
+\(7.9 \times 10^{-7}\) & 1 \\
+Creation of a \(500 \times 500\) Toeplitz matrix - Armadillo &
+\(4 \times 10^{-4}\) & 2 \\
+Creation of a \(500 \times 500\) Toeplitz matrix - R &
+\(2.6 \times 10^{-3}\) & 3 \\
+Escoufier's method on a \(45 \times 45\) matrix - Armadillo &
+\(2.4 \times 10^{-2}\) & 1 \\
+Escoufier's method on a \(45 \times 45\) matrix - Eigen &
+\(3.2 \times 10^{-2}\) & 2 \\
+Escoufier's method on a \(45 \times 45\) matrix - R &
+\(1.4 \times 10^{-1}\) & 3 \\
+Grand common divisors of 400,000 pairs - Eigen & \(2.1 \times 10^{-2}\)
+& 1 \\
+Grand common divisors of 400,000 pairs - Armadillo &
+\(2.3 \times 10^{-2}\) & 2 \\
+Grand common divisors of 400,000 pairs - R & \(1.884\) & 3 \\
+\end{longtable}
+
+The results reveal that Armadillo leads in most of the benchmarks, but
+Eigen is particularly faster in some tests such as the Fast Fourier
+Transform. R is the second or third in all benchmarks, but it is
+important to note that R comes with an additional advantage in terms of
+simplified syntax and the ability to run the code without compiling it.
+
+These tests are not exhaustive, and we must be cautious when
+interpreting the results. The ATT benchmark is a good starting point,
+but it does not cover mundane tasks such as data manipulation, and it is
+important to consider the tradeoff between computational efficiency and
+ease of use.
+
+\section{Comparison with R packages}\label{comparison-with-r-packages}
+
+The syntax and speed differences posit a similar case to the tradeoff
+between using \texttt{dplyr} and \texttt{data.table} (Wickham et al.
+2019; Barrett et al. 2024), where \texttt{dplyr} is easier to use but
+\texttt{data.table} is faster. \texttt{dplyr} was not designed to be
+fast but \texttt{data.table} was not designed to be easy to use. For
+instance, the code to obtain the grouped means by number of cylinders in
+the \texttt{mtcars} dataset is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dplyr}
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(cyl) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise\_all}\NormalTok{(mean)}
+
+\CommentTok{\# data.table}
+\FunctionTok{as.data.table}\NormalTok{(mtcars)[, }\FunctionTok{lapply}\NormalTok{(.SD, mean), by }\OtherTok{=}\NormalTok{ cyl]}
+\end{Highlighting}
+\end{Shaded}
+
+The benchmark for the grouped means reveals that \texttt{dplyr} has a
+median time of 2.7 ms and \texttt{data.table} has a median time of 600
+\(\mu\)s, and this means that \texttt{dplyr} is four times slower than
+\texttt{data.table} at this task. The syntax of \texttt{dplyr} is easier
+to understand for non-programmers, but \texttt{data.table} can be
+equally expressive for users who are familiar with its syntax.
+
+The tests for Armadillo and Eigen reveal that, for repeated and
+computationally intensive tasks, rewriting R code in C++ can lead to
+significant performance improvements, but it comes at the cost of
+learning a new syntax.
+
+As with \texttt{dplyr} and \texttt{data.table}, the choice between
+Armadillo and Eigen As an example, the \texttt{economiccomplexity}
+package (Vargas Sepulveda 2020) uses base R depends on the user's needs
+and preferences. For instance, Armadillo or Eigen can be ideal to work
+with a \(1,000,000 \times 1,000,000\) matrix but R can be more suitable
+for a \(1,000 \times 1,000\) matrix, and something similar applies to
+\texttt{dplyr} that is suitable for a 2-4 GB CSV files or SQL data but
+\texttt{data.table} is more suitable for 100 GB CSV datasets.
+
+\section{Cases where Armadillo and Eigen stand
+out}\label{cases-where-armadillo-and-eigen-stand-out}
+
+Vargas Sepulveda (2020) uses base R and the Matrix package to calculate
+the Balassa index and provides international trade data for 226
+countries and 785 exported commodities.
+
+Let \(X \in \mathbb{R}^{C\times P}\) be a matrix with entries
+\(x_{c,p}\) that represents the exports of country \(c\) in product
+\(p\), from this matrix the Balassa indices matrix is calculated as:
+
+\begin{equation}
+\label{eq:balassa1}
+B = ([X \oslash (X \vec{1}_{P\times 1})]^t \oslash  [X^t \vec{1}_{C\times 1} \oslash (\vec{1}_{C\times 1}^t X \vec{1}_{P\times 1})])^t,
+\end{equation}
+
+where \(\oslash\) denotes element-wise division and \(t\) denotes
+transposition.
+
+This is the same as the Balassa index for country \(c\) and product
+\(p\): \begin{equation}
+\label{eq:balassa2}
+B_{cp} = \frac{x_{cp}}{\sum_c x_{cp}} / \frac{\sum_p x_{cp}}{\sum_{c}\sum_{p} x_{cp}}
+\end{equation}
+
+What is often used is to produce a zeroes and ones matrix \(S\) defined
+as:
+
+\begin{equation}
+\label{eq:balassa3}
+s_{c,p} = \begin{cases}1 & \text{ if } b_{cp} > 1\cr 0 & \text{ otherwise} \end{cases}
+\end{equation}
+
+\eqref{eq:balassa3} can be implemented in base R as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{balassa\_r }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(X) \{}
+\NormalTok{  B }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{t}\NormalTok{(X }\SpecialCharTok{/} \FunctionTok{rowSums}\NormalTok{(X)) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{colSums}\NormalTok{(X) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(X)))}
+\NormalTok{  B[B }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{  B[B }\SpecialCharTok{\textgreater{}=} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{  B}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The C++ code using \texttt{cpp11armadillo} is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11.hpp\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11armadillo.hpp\textgreater{}}
+
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ cpp11}\OperatorTok{;}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ arma}\OperatorTok{;}
+
+\OperatorTok{[[}\AttributeTok{cpp11}\OperatorTok{::}\AttributeTok{register}\OperatorTok{]]}\NormalTok{ doubles\_matrix}\OperatorTok{\textless{}\textgreater{}} \VariableTok{balassa\_arma\_}\OperatorTok{(}
+  \AttributeTok{const}\NormalTok{ doubles\_matrix}\OperatorTok{\textless{}\textgreater{}\&}\NormalTok{ x}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{  mat X }\OperatorTok{=}\NormalTok{ as\_Mat}\OperatorTok{(}\NormalTok{x}\OperatorTok{);}
+
+\NormalTok{  mat B }\OperatorTok{=}\NormalTok{ X}\OperatorTok{.}\NormalTok{each\_col}\OperatorTok{()} \OperatorTok{/}\NormalTok{ sum}\OperatorTok{(}\NormalTok{X}\OperatorTok{,} \DecValTok{1}\OperatorTok{);}
+\NormalTok{  B }\OperatorTok{=}\NormalTok{ B}\OperatorTok{.}\NormalTok{each\_row}\OperatorTok{()} \OperatorTok{/} \OperatorTok{(}\NormalTok{sum}\OperatorTok{(}\NormalTok{X}\OperatorTok{,} \DecValTok{0}\OperatorTok{)} \OperatorTok{/}\NormalTok{ accu}\OperatorTok{(}\NormalTok{X}\OperatorTok{));}
+\NormalTok{  B}\OperatorTok{.}\NormalTok{elem}\OperatorTok{(}\NormalTok{find}\OperatorTok{(}\NormalTok{B }\OperatorTok{\textless{}} \DecValTok{1}\OperatorTok{)).}\NormalTok{zeros}\OperatorTok{();}
+\NormalTok{  B}\OperatorTok{.}\NormalTok{elem}\OperatorTok{(}\NormalTok{find}\OperatorTok{(}\NormalTok{B }\OperatorTok{\textgreater{}=} \DecValTok{1}\OperatorTok{)).}\NormalTok{ones}\OperatorTok{();}
+
+  \ControlFlowTok{return}\NormalTok{ as\_doubles\_matrix}\OperatorTok{(}\NormalTok{B}\OperatorTok{);}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The C++ code using \texttt{cpp11eigen} is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11.hpp\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}cpp11eigen.hpp\textgreater{}}
+
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ cpp11}\OperatorTok{;}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ Eigen}\OperatorTok{;}
+
+\OperatorTok{[[}\AttributeTok{cpp11}\OperatorTok{::}\AttributeTok{register}\OperatorTok{]]}\NormalTok{ doubles\_matrix}\OperatorTok{\textless{}\textgreater{}} \VariableTok{balassa\_eigen\_}\OperatorTok{(}
+  \AttributeTok{const}\NormalTok{ doubles\_matrix}\OperatorTok{\textless{}\textgreater{}\&}\NormalTok{ x}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{  MatrixXd X }\OperatorTok{=}\NormalTok{ as\_Matrix}\OperatorTok{(}\NormalTok{x}\OperatorTok{);}
+
+\NormalTok{  MatrixXd B }\OperatorTok{=}\NormalTok{ X}\OperatorTok{.}\NormalTok{array}\OperatorTok{().}\NormalTok{rowwise}\OperatorTok{()} \OperatorTok{/}\NormalTok{ X}\OperatorTok{.}\NormalTok{rowwise}\OperatorTok{().}\NormalTok{sum}\OperatorTok{().}\NormalTok{array}\OperatorTok{();}
+\NormalTok{  B }\OperatorTok{=}\NormalTok{ B}\OperatorTok{.}\NormalTok{array}\OperatorTok{().}\NormalTok{colwise}\OperatorTok{()} \OperatorTok{/} \OperatorTok{(}\NormalTok{X}\OperatorTok{.}\NormalTok{colwise}\OperatorTok{().}\NormalTok{sum}\OperatorTok{().}\NormalTok{array}\OperatorTok{()} \OperatorTok{/}\NormalTok{ X}\OperatorTok{.}\NormalTok{sum}\OperatorTok{());}
+\NormalTok{  B }\OperatorTok{=} \OperatorTok{(}\NormalTok{B}\OperatorTok{.}\NormalTok{array}\OperatorTok{()} \OperatorTok{\textless{}} \DecValTok{1}\OperatorTok{).}\NormalTok{select}\OperatorTok{(}\DecValTok{0}\OperatorTok{,}\NormalTok{ B}\OperatorTok{);}
+\NormalTok{  B }\OperatorTok{=} \OperatorTok{(}\NormalTok{B}\OperatorTok{.}\NormalTok{array}\OperatorTok{()} \OperatorTok{\textgreater{}=} \DecValTok{1}\OperatorTok{).}\NormalTok{select}\OperatorTok{(}\DecValTok{1}\OperatorTok{,}\NormalTok{ B}\OperatorTok{);}
+
+  \ControlFlowTok{return}\NormalTok{ as\_doubles\_matrix}\OperatorTok{(}\NormalTok{B}\OperatorTok{);}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+If we use UN COMTRADE data for the year 2020 for 234 countries and 5,386
+countries (United Nations 2023), we can observe that Armadillo and Eigen
+are around two times faster than base R at obtaining the Balassa matrix,
+and this includes the time to move the data between R and C++:
+
+\begin{longtable}[]{@{}lrr@{}}
+\caption{Balassa indices}\tabularnewline
+\toprule\noalign{}
+Operation & Time (s) & Rank \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Operation & Time (s) & Rank \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Balassa indices Eigen & 0.013 & 1 \\
+Balassa indices Armadillo & 0.014 & 2 \\
+Balassa indices R & 0.026 & 3 \\
+\end{longtable}
+
+The rest of the methods in Vargas Sepulveda (2020) involve recursion and
+eigenvalues computation, and these tasks were already covered in the ATT
+benchmark, meaning that the same speed gains can be expected as in the
+Balassa matrix.
+
+\section{Conclusion}\label{conclusion}
+
+Armadillo and Eigen can be highly expressive, these are flexible
+libraries once the user has learned the syntax, and these languages have
+data structures that do not exist in R that help to write efficient
+code. Eigen and \texttt{cpp11eigen} do not simplify the process of
+writing C++ code for R users but excels at computationally demanding
+applications. Armadillo and \texttt{cpp11armadillo}, on the other hand,
+provides a balance between speed and ease of use, and it is a good
+choice for users who need to write C++ code that is easier to modify and
+maintain.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-barrett2024}
+Barrett, Tyson, Matt Dowle, Arun Srinivasan, Jan Gorecki, Michael
+Chirico, and Toby Hocking. 2024. \emph{Data.table: Extension of
+`Data.frame`}. \url{https://CRAN.R-project.org/package=data.table}.
+
+\bibitem[\citeproctext]{ref-burns2011r}
+Burns, Patrick. 2011. \emph{The r Inferno}. Lulu.
+
+\bibitem[\citeproctext]{ref-eddelbuettel2014}
+Eddelbuettel, Dirk, and Conrad Sanderson. 2014. {``{RcppArmadillo}:
+{Accelerating} {R} with High-Performance {C}++ Linear Algebra.''}
+\emph{Computational Statistics \& Data Analysis} 71 (March): 1054--63.
+\url{https://doi.org/10.1016/j.csda.2013.02.005}.
+
+\bibitem[\citeproctext]{ref-lee2024}
+Lee, Clement. 2024. \emph{Crandep: Network Analysis of Dependencies of
+CRAN Packages}. \url{https://CRAN.R-project.org/package=crandep}.
+
+\bibitem[\citeproctext]{ref-sanderson2016}
+Sanderson, Conrad, and Ryan Curtin. 2016. {``Armadillo: A Template-Based
+c++ Library for Linear Algebra.''} \emph{Journal of Open Source
+Software} 1 (2): 26. \url{https://doi.org/10.21105/joss.00026}.
+
+\bibitem[\citeproctext]{ref-unitednations2023}
+United Nations. 2023. {``{UN} {Comtrade}.''}
+\url{https://comtradeplus.un.org/}.
+
+\bibitem[\citeproctext]{ref-vargassepulveda2020}
+Vargas Sepulveda, Mauricio. 2020. {``Economiccomplexity: {Computational}
+{Methods} for {Economic} {Complexity}.''} \emph{Journal of Open Source
+Software} 5 (46): 1866. \url{https://doi.org/10.21105/joss.01866}.
+
+\bibitem[\citeproctext]{ref-vargas2024a}
+Vargas Sepúlveda, Mauricio. 2023. \emph{The {Hitchhiker}'s {Guide} to
+{Linear} {Models}}. Leanpub.
+\url{https://leanpub.com/linear-models-guide}.
+
+\bibitem[\citeproctext]{ref-vargas2024b}
+Vargas Sepúlveda, Mauricio, and Jonathan Schneider Malamud. 2024.
+{``Cpp11armadillo: {An} {R} {Package} to {Use} the {Armadillo} {C}++
+{Library}.''} arXiv. \url{https://doi.org/10.48550/arXiv.2408.11074}.
+
+\bibitem[\citeproctext]{ref-cpp11}
+Vaughan, Davis, Jim Hester, and Romain François. 2023. \emph{Cpp11: A
+c++11 Interface for r's c Interface}.
+\url{https://CRAN.R-project.org/package=cpp11}.
+
+\bibitem[\citeproctext]{ref-wickham2019}
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
+D'Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
+{``Welcome to the Tidyverse.''} \emph{Journal of Open Source Software} 4
+(43): 1686. \url{https://doi.org/10.21105/joss.01686}.
+
+\end{CSLReferences}
+
+% Index?
+% \printindex
+
+\end{document}
